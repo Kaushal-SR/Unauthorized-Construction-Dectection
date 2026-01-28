@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Unauthorized Construction Monitoring</title>
+    <link rel="stylesheet" href="../src/style.css">
+    <style>
+        .about-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-radius: 8px;
+            padding: 32px;
+        }
+        .team-section {
+            display: flex;
+            justify-content: space-between;
+            gap: 32px;
+            margin-top: 32px;
+        }
+        .member-card {
+            flex: 1;
+            background: #f8fafc;
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 220px;
+        }
+        .member-photo {
+            width: 100px;
+            height: 100px;
+            background: #e0e7ef;
+            border-radius: 50%;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #b0b8c1;
+        }
+        .member-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2a5d84;
+        }
+        .member-bio {
+            color: #555;
+            font-size: 1rem;
+            text-align: center;
+            min-height: 60px;
+        }
+        @media (max-width: 800px) {
+            .team-section {
+                flex-direction: column;
+                gap: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="about-container">
+        <h1 style="text-align:center; color:#2a5d84;">About Our Team</h1>
+        <p style="text-align:center; color:#444;">Meet the team behind the Online Monitoring of Unauthorized Construction project.</p>
+        <div class="team-section">
+            <div class="member-card">
+                <div class="member-photo">A</div>
+                <div class="member-name">Member 1</div>
+                <div class="member-bio">Short bio or details about Member 1. (Replace with real info later.)</div>
+            </div>
+            <div class="member-card">
+                <div class="member-photo">B</div>
+                <div class="member-name">Member 2</div>
+                <div class="member-bio">Short bio or details about Member 2. (Replace with real info later.)</div>
+            </div>
+            <div class="member-card">
+                <div class="member-photo">C</div>
+                <div class="member-name">Member 3</div>
+                <div class="member-bio">Short bio or details about Member 3. (Replace with real info later.)</div>
+            </div>
+        </div>
+        <div style="text-align:center; margin-top:32px;">
+            <a href="index.html" style="color:#2a5d84; text-decoration:underline;">&larr; Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
