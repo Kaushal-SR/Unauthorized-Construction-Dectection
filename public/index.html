@@ -13,92 +13,91 @@
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#upload">Upload Images</a></li>
-                <!-- About removed from nav -->
+                <li><a href="#dataset-browser">Dataset Browser</a></li>
             </ul>
         </nav>
         <div class="content">
-            <header>
+            <header id="home">
                 <h1>Online Monitoring of Unauthorized Construction Across the City</h1>
             </header>
             <main>
                 <section class="box-section description">
                     <h2>Project Overview</h2>
                     <p>
-                        MCD is working on monitoring unauthorized construction across the city. A viable and low-cost solution is required. Drone-based surveys of swathes of land/areas at defined time intervals will help in real-time detection of unauthorized construction. We plan to train a model for change detection using old and new images in the future. For now, this site will serve as the foundation for our monitoring platform.
+                        This platform uses a <strong>ChangeFormer</strong> (Transformer-based Siamese network)
+                        pretrained on the LEVIR-CD dataset to detect structural changes between two satellite / drone
+                        images of the same area. Upload your own before &amp; after images, or browse the built-in
+                        LEVIR-CD+ test dataset to see change detection in action.
                     </p>
                 </section>
 
                 <section class="box-section how-it-works" id="how-it-works">
                     <h2>How It Works</h2>
                     <ol style="line-height:1.7;">
-                        <li><strong>Upload Images:</strong> Submit an old and a new image of the same area, or select a pre-added dataset.</li>
-                        <li><strong>Change Detection:</strong> Our backend (demo: simulated) uses a Siamese CNN model to compare the images and generate a change mask.</li>
-                        <li><strong>Highlight Changes:</strong> Detected changes are highlighted with bounding boxes on the new image.</li>
-                        <li><strong>Illegal Detection (Demo):</strong> Fake parameters or rules are applied (e.g., large change area, specific regions) to mark detected changes as illegal construction for demonstration purposes.</li>
-                        <li><strong>Results:</strong> The site displays the bounding boxes and a message indicating whether illegal construction is detected, along with details.</li>
+                        <li><strong>Upload Images:</strong> Submit an old and a new image of the same area, or pick a pair from the LEVIR-CD+ dataset.</li>
+                        <li><strong>Change Detection:</strong> The backend runs the ChangeFormerV6 model to produce a pixel-level change mask.</li>
+                        <li><strong>Highlight Changes:</strong> Detected change regions are shown as bounding boxes and an overlay mask on the new image.</li>
+                        <li><strong>Results:</strong> The site displays the change percentage and marks whether significant construction change is detected.</li>
                     </ol>
-                    <p style="margin-top:16px; color:#555;">This workflow is designed for demonstration and can be extended with real models and rules for production use.</p>
                 </section>
+
+                <!-- Upload section -->
                 <section class="upload-section" id="upload">
-                    <h3>Submit Images for Change Detection</h3>
+                    <h3>Upload Your Own Images</h3>
                     <form class="upload-form" id="imageUploadForm">
                         <div>
-                            <label for="oldImage">Old Image:</label>
+                            <label for="oldImage">Old Image (before):</label>
                             <input type="file" id="oldImage" name="oldImage" accept="image/*" required>
                         </div>
                         <div>
-                            <label for="newImage">New Image:</label>
+                            <label for="newImage">New Image (after):</label>
                             <input type="file" id="newImage" name="newImage" accept="image/*" required>
                         </div>
                         <button type="submit">Run Change Detection</button>
                     </form>
                     <div id="result" style="margin-top:18px;"></div>
+                    <div id="uploadVisual" class="result-grid" style="display:none;"></div>
                 </section>
 
-                <section class="upload-section" id="datasets">
-                    <h3>Try with Pre-Added Datasets</h3>
-                    <p>If you don't have images, select a sample dataset below to see how the site works:</p>
-                    <form class="upload-form" id="datasetForm">
-                        <label for="datasetSelect">Choose a dataset:</label>
-                        <select id="datasetSelect" name="datasetSelect">
-                            <option value="">-- Select Dataset --</option>
-                            <option value="set1">Sample Area 1</option>
-                            <option value="set2">Sample Area 2</option>
-                            <option value="set3">Sample Area 3</option>
-                        </select>
-                        <button type="submit">Run Change Detection on Dataset</button>
-                    </form>
+                <!-- Dataset Browser -->
+                <section class="upload-section" id="dataset-browser">
+                    <h3>Browse LEVIR-CD+ Dataset</h3>
+                    <div class="dataset-controls">
+                        <label>Split:
+                            <select id="splitSelect">
+                                <option value="test" selected>Test (348 pairs)</option>
+                                <option value="train">Train (637 pairs)</option>
+                            </select>
+                        </label>
+                        <button id="prevPage" class="page-btn">&larr; Prev</button>
+                        <span id="pageInfo">Page 1</span>
+                        <button id="nextPage" class="page-btn">Next &rarr;</button>
+                    </div>
+                    <div id="datasetGrid" class="dataset-grid"></div>
                     <div id="datasetResult" style="margin-top:18px;"></div>
+                    <div id="datasetVisual" class="result-grid" style="display:none;"></div>
+                </section>
+
+                <!-- Resources -->
+                <section class="box-section resources-section" id="resources">
+                    <h2>Related Resources</h2>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom:14px;">
+                            <a href="https://github.com/wgcban/ChangeFormer" target="_blank" style="color:#2a5d84; font-weight:600;">ChangeFormer — Transformer-Based Siamese Network for Change Detection</a><br>
+                            <span style="color:#555; font-size:0.95rem;">The pretrained model used in this project (IGARSS 2022).</span>
+                        </li>
+                        <li style="margin-bottom:14px;">
+                            <a href="https://justchenhao.github.io/LEVIR/" target="_blank" style="color:#2a5d84; font-weight:600;">LEVIR-CD Dataset</a><br>
+                            <span style="color:#555; font-size:0.95rem;">Large-scale remote sensing change detection benchmark dataset.</span>
+                        </li>
+                    </ul>
                 </section>
             </main>
-            <!-- Resources section just above the footer -->
-            <section class="box-section resources-section" id="resources">
-                <h2>Related Resources & Documentation</h2>
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li style="margin-bottom: 18px;">
-                        <a href="#" style="color:#2a5d84; font-weight:600; text-decoration:underline;">[Sample] Research Paper: Deep Learning for Urban Change Detection</a><br>
-                        <span style="color:#555; font-size:0.97rem;">A comprehensive study on using Siamese CNNs for detecting construction changes in urban environments.</span>
-                    </li>
-                    <li style="margin-bottom: 18px;">
-                        <a href="#" style="color:#2a5d84; font-weight:600; text-decoration:underline;">[Sample] Project Documentation: Unauthorized Construction Monitoring Platform</a><br>
-                        <span style="color:#555; font-size:0.97rem;">Technical documentation and API reference for our monitoring solution.</span>
-                    </li>
-                    <li style="margin-bottom: 18px;">
-                        <a href="#" style="color:#2a5d84; font-weight:600; text-decoration:underline;">[Sample] Open Dataset: Urban Drone Imagery</a><br>
-                        <span style="color:#555; font-size:0.97rem;">A curated set of drone images for training and testing change detection models.</span>
-                    </li>
-                    <li>
-                        <a href="#" style="color:#2a5d84; font-weight:600; text-decoration:underline;">[Sample] Guide: Annotating Construction Changes</a><br>
-                        <span style="color:#555; font-size:0.97rem;">Step-by-step guide for labeling and preparing data for change detection tasks.</span>
-                    </li>
-                </ul>
-            </section>
             <footer>
                 <div style="text-align:center; color:#2a5d84; font-size:1.08rem; line-height:1.7;">
                     <strong>Empowering Cities, One Pixel at a Time.</strong><br>
-                    Crafted with passion and purpose by <span style="font-weight:600; color:#1a3a5d;">us</span> — your friendly neighborhood innovators.<br>
-                    <a href="about.html" style="color:#2a5d84; text-decoration:underline; font-weight:500;">Meet the Team</a><br>
-                    <span style="color:#888;">&copy; 2026 MCD. All rights reserved.</span>
+                    Crafted with passion and purpose by <span style="font-weight:600; color:#1a3a5d;">us</span><br>
+                    <a href="about.html" style="color:#2a5d84; text-decoration:underline; font-weight:500;">Meet the Team</a>
                 </div>
             </footer>
         </div>
